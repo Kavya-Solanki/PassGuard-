@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PassGuard | Password Strength Checker & Generator</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50 flex items-center justify-center font-sans">
+  <main class="bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl p-10 w-full max-w-4xl border border-indigo-100">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+        PassGuard
+      </h1>
+      <p class="text-gray-600 mt-2">Intelligent Password Strength Checker & Generator</p>
+      <p class="text-xs text-gray-400">(Privacy-First • Runs Locally)</p>
+    </header>
+
+    <section class="grid md:grid-cols-2 gap-10">
+      <!-- Password Strength Checker -->
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700 mb-3">Password Strength Checker</h2>
+
+        <div class="relative mb-2">
+          <input id="passwordInput" type="password"
+                 placeholder="Enter your password..."
+                 class="w-full border rounded-lg px-4 py-3 pr-10 focus:ring-2 focus:ring-indigo-400 outline-none" />
+          <button id="togglePassword" type="button"
+                  class="absolute right-3 top-3 text-gray-500 hover:text-indigo-600">
+            <i data-lucide="eye"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span id="strengthLabel" class="font-medium text-gray-700">Strength: —</span>
+          <span id="entropyLabel" class="text-gray-500 text-xs">Entropy: 0 bits</span>
+        </div>
+
+        <div class="bg-gray-200 rounded-full h-3 mt-1">
+          <div id="strengthBar" class="h-3 rounded-full bg-gray-400 w-0 transition-all duration-300"></div>
+        </div>
+
+        <!-- Criteria indicators -->
+        <div id="criteria" class="flex justify-between text-xs mt-2">
+          <span id="critLower"  class="px-2 py-1 rounded bg-red-200 text-red-800">Lowercase</span>
+          <span id="critUpper"  class="px-2 py-1 rounded bg-red-200 text-red-800">Uppercase</span>
+          <span id="critNumber" class="px-2 py-1 rounded bg-red-200 text-red-800">Number</span>
+          <span id="critSymbol" class="px-2 py-1 rounded bg-red-200 text-red-800">Symbol</span>
+        </div>
+
+        <div id="warnings" class="hidden mt-4 p-3 bg-red-50 border-l-4 border-red-400 text-sm text-red-700 rounded"></div>
+        <div id="suggestions" class="hidden mt-4 p-3 bg-blue-50 border-l-4 border-blue-400 text-sm text-blue-700 rounded"></div>
+
+        <div class="mt-4 p-3 bg-gray-50 border rounded text-sm">
+          <h3 class="font-semibold">Security Tips</h3>
+          <ul class="list-disc list-inside text-gray-600 mt-1">
+            <li>Use 12–16+ characters.</li>
+            <li>Include uppercase, lowercase, numbers & symbols.</li>
+            <li>Avoid common words & predictable patterns.</li>
+            <li>Use a password manager for every account.</li>
+          </ul>
+        </div>
+
+        <!-- ✅ Submit Button -->
+        <button id="btnSubmit"
+                class="mt-5 w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+          Submit Password
+        </button>
+
+        <div id="submitMsg" class="hidden mt-3 text-center text-green-700 font-medium"></div>
+      </div>
+
+      <!-- Password Generator -->
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700 mb-3">Password Generator</h2>
+        <label class="text-sm">Length: <span id="lenDisplay">16</span></label>
+        <input id="lengthRange" type="range" min="4" max="32" value="16" class="w-full mb-3 accent-indigo-600" />
+
+        <div class="grid grid-cols-2 gap-2 text-sm mb-4">
+          <label><input type="checkbox" id="chkUpper" checked> Uppercase</label>
+          <label><input type="checkbox" id="chkLower" checked> Lowercase</label>
+          <label><input type="checkbox" id="chkNumbers" checked> Numbers</label>
+          <label><input type="checkbox" id="chkSymbols" checked> Symbols</label>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+          <button id="btnGenerateUse"
+                  class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition-colors">
+            Generate & Use
+          </button>
+          <button id="btnGenerate"
+                  class="flex-1 bg-gray-200 text-gray-800 py-2 rounded hover:bg-gray-300 transition-colors">
+            Generate
+          </button>
+        </div>
+
+        <div id="generatedBox"
+             class="hidden bg-gray-50 border rounded p-3 text-sm font-mono text-gray-700 break-all"></div>
+      </div>
+    </section>
+
+    <footer class="mt-8 text-center text-xs text-gray-400">
+      © 2025 PassGuard 
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
